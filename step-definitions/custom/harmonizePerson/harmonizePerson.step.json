@@ -1,0 +1,20 @@
+{
+  "language" : "zxx",
+  "name" : "harmonizePerson",
+  "description" : "",
+  "type" : "CUSTOM",
+  "version" : 1,
+  "options" : {
+    "sourceQuery" : "cts.collectionQuery([\"inFW\"])",
+    "targetEntity" : "Person",
+    "collections" : [ "harmonizePerson", "Person" ],
+    "sourceDatabase" : "data-hub-STAGING",
+    "sourceCollection" : "inFW",
+    "targetDatabase" : "data-hub-FINAL"
+  },
+  "customHook" : { },
+  "modulePath" : "/custom-modules/custom/harmonizePerson/main.sjs",
+  "retryLimit" : 0,
+  "batchSize" : 100,
+  "threadCount" : 4
+}

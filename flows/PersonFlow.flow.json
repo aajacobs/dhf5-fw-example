@@ -1,0 +1,74 @@
+{
+  "name" : "PersonFlow",
+  "description" : "null",
+  "batchSize" : 100,
+  "threadCount" : 4,
+  "stopOnError" : false,
+  "options" : { },
+  "version" : 0,
+  "steps" : {
+    "1" : {
+      "name" : "fwconfig",
+      "description" : "",
+      "options" : {
+        "sourceQuery" : "cts.collectionQuery([\"\"])",
+        "collections" : [ "fwconfig" ],
+        "permissions" : "rest-reader,read,rest-writer,update",
+        "outputFormat" : "json",
+        "targetDatabase" : "data-hub-STAGING"
+      },
+      "customHook" : { },
+      "retryLimit" : null,
+      "batchSize" : null,
+      "threadCount" : null,
+      "stepDefinitionName" : "default-ingestion",
+      "stepDefinitionType" : "INGESTION",
+      "fileLocations" : {
+        "inputFilePath" : "/Users/ajacobs/MarkLogic/git/ga-fixedwidth/data/config",
+        "inputFileType" : "json",
+        "outputURIReplacement" : ""
+      }
+    },
+    "2" : {
+      "name" : "inFW",
+      "description" : "",
+      "options" : {
+        "sourceQuery" : "cts.collectionQuery([\"\"])",
+        "collections" : [ "inFW" ],
+        "permissions" : "rest-reader,read,rest-writer,update",
+        "outputFormat" : "text",
+        "targetDatabase" : "data-hub-STAGING"
+      },
+      "customHook" : { },
+      "retryLimit" : 0,
+      "batchSize" : 0,
+      "threadCount" : 0,
+      "stepDefinitionName" : "default-ingestion",
+      "stepDefinitionType" : "INGESTION",
+      "fileLocations" : {
+        "inputFilePath" : "/Users/ajacobs/MarkLogic/git/ga-fixedwidth/data/testData",
+        "inputFileType" : "csv",
+        "outputURIReplacement" : ""
+      }
+    },
+    "3" : {
+      "name" : "harmonizePerson",
+      "description" : "",
+      "options" : {
+        "sourceQuery" : "cts.collectionQuery([\"inFW\"])",
+        "targetEntity" : "Person",
+        "collections" : [ "harmonizePerson", "Person" ],
+        "sourceDatabase" : "data-hub-STAGING",
+        "sourceCollection" : "inFW",
+        "targetDatabase" : "data-hub-FINAL"
+      },
+      "customHook" : null,
+      "retryLimit" : 0,
+      "batchSize" : 0,
+      "threadCount" : 0,
+      "stepDefinitionName" : "harmonizePerson",
+      "stepDefinitionType" : "CUSTOM",
+      "modulePath" : "/custom-modules/custom/harmonizePerson/main.sjs"
+    }
+  }
+}

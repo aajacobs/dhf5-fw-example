@@ -1,0 +1,6 @@
+{
+  "id": { "type": "string", "start_pos": 0, "end_pos": 3 },
+  "firstName": { "type": "string", "start_pos": 3, "end_pos": 11 },
+  "lastName": { "type": "string", "start_pos": 11, "end_pos": 17 },
+  "age": { "type": "int", "start_pos": 17, "end_pos": 20 }
+}
